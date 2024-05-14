@@ -1,0 +1,35 @@
+services:
+  db:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: notSecureChangeMe
+      MYSQL_DATABASE: mydatabase  # Nombre de la base de datos
+      MYSQL_USER: test            # Nombre del usuario
+      MYSQL_PASSWORD: userpassword  # Contraseña para el usuario
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    volumes:
+      - ./src/test/resources/db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: test
+      PMA_PASSWORD: userpassword
+      PMA_ARBITRARY: 1
+    depends_on:
+      - db
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

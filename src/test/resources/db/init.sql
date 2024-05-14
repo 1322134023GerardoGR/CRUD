@@ -1,0 +1,2 @@
+CREATE TABLE mydatabase.songs (id BIGINT NOT NULL AUTO_INCREMENT , name VARCHAR(100) NOT NULL , artist VARCHAR(100) NULL , PRIMARY KEY (ID)) ENGINE = InnoDB;
+INSERT INTO `songs` (`id`, `name`, `artist`) VALUES (NULL, 'asda', 'asdad'), (NULL,'Break my Baby','kaleo'), (NULL,'Hey gringo','kaleo'), (NULL,'Too sweet','hozier'), (NULL,'No plan',NULL);
